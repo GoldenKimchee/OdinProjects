@@ -74,8 +74,8 @@ function checkPixelValid() {
   const containsOthers = /^[0-9]+$/.test(pixelNumber);
   const intPixelNumber = parseInt(pixelNumber);
   
-  // Is not a number     OR  Is not a number    OR contains other chars  OR  exceeds 100 resolution limit
-  if (pixelNumber.includes('.') || isNaN(intPixelNumber) || !containsOthers || pixelNumber > 100) {
+  // Is not a number  OR  contains other chars  OR  exceeds 100 resolution limit
+  if (isNaN(intPixelNumber) || !containsOthers || pixelNumber > 100) {
     return false;
   } else {
     return true;

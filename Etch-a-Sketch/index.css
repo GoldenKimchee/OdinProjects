@@ -2,7 +2,7 @@
   --clr-btn-primary: #7bb99a;
   --clr-btn-secondary: #679c84;
   --clr-grid: rgb(248, 248, 248);
-  --clr-title: #314c45;
+  --clr-title: #679c84;
   --clr-font: rgb(255, 255, 255);
   --clr-background: #c3dce8;
 
@@ -10,7 +10,16 @@
 
   --ff-primary: "Barlow Semi Condensed", sans-serif;
 
+  --fs-h1: 1.75rem;
   --fs-primary: 1.25rem;
+
+  --fw-heavy: 700;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+  margin-bottom: 1rem;
+  color: var(--clr-title);
 }
 
 body {
@@ -79,10 +88,6 @@ button:active {
   transform: translateY(4px);
 }
 
-h1 {
-  color: var(--clr-title);
-}
-
 input {
   max-width: 3.5rem;
 }
@@ -115,6 +120,23 @@ div#main-grid > div {
   border: 0.5px solid black;
 }
 
+.gradient-wipe {
+  background: linear-gradient(-45deg, #f896e0, #51a2db, #e89a3e, #87b459);
+  background-size: 300%;
+  font-weight: var(--fw-heavy);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animated_text 10s ease-in-out infinite;
+  -moz-animation: animated_text 10s ease-in-out infinite;
+  -webkit-animation: animated_text 10s ease-in-out infinite;
+}
+
+@keyframes animated_text {
+  0% { background-position: 0px 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0px 50%; }
+}
+
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
@@ -128,10 +150,5 @@ div#main-grid > div {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-}
-
-@media screen and (min-width: 40em) {
-  .class {
   }
 }
