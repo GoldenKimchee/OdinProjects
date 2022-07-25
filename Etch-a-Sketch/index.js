@@ -9,13 +9,22 @@ const altResolution = document.querySelector('p#alt-resolution');
 // Default color to black
 let currentColor = '#000000';
 
-pixelInput.addEventListener('input', () => {
+pixelInput.addEventListener('input', updatePixelNumber);
+
+function updatePixelNumber() {
+  if (checkPixelValid()) {
+    altResolution.style.color = "black";
+  } else {
+    altResolution.style.color = "red";
+  }
+
   altResolution.innerHTML = pixelInput.value;
-});
+}
 
 // When DOM is fully loaded
 window.addEventListener('DOMContentLoaded', (event) => {
   getColor();
+  updatePixelNumber();
 });
 
 // Create a new grid if 'generate' is clicked
@@ -27,8 +36,8 @@ generateButton.addEventListener('click', () => {
   const resolution = parseInt(pixelInput.value);
 
   // Check if resolution does not exceed the 100x100 limit
-  if (resolution > 100) {
-    mainGrid.innerHTML = '<p>The maximum resolution is 100x100. Please enter a number equal to or lower than 100.</p>';
+  if (!checkPixelValid()) {
+    mainGrid.innerHTML = '<p>The resolution has to be a whole number, and not exceed the 100 pixel limit.</p>';
     document.documentElement.style.setProperty('--grid-resolution', 1);
     return;
   }
@@ -58,4 +67,17 @@ inputColor.addEventListener('input', getColor);
 
 function getColor() {
   currentColor = inputColor.value;
+}
+
+function checkPixelValid() {
+  const pixelNumber = pixelInput.value;
+  const containsOthers = /^[0-9]+$/.test(pixelNumber);
+  const intPixelNumber = parseInt(pixelNumber);
+  
+  // Is not a number     OR  Is not a number    OR contains other chars  OR  exceeds 100 resolution limit
+  if (pixelNumber.includes('.') || isNaN(intPixelNumber) || !containsOthers || pixelNumber > 100) {
+    return false;
+  } else {
+    return true;
+  }
 }
