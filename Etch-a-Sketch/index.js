@@ -5,6 +5,7 @@ const generateButton = document.querySelector('button#generate');
 const pixelInput = document.querySelector('input#resolution');
 const inputColor = document.querySelector('input#color');
 const altResolution = document.querySelector('p#alt-resolution');
+const soundobj = document.getElementById("hover-sound");
 
 // Default color to black
 let currentColor = '#000000';
@@ -56,7 +57,12 @@ function generateGridDivs(length) {
 
     // Allow grid divs to change color when the mouse is on it
     gridDiv.addEventListener('mouseover', (event) => {
+      soundobj.play();
       event.target.style.backgroundColor = currentColor;
+    });
+    gridDiv.addEventListener('mouseleave', (event) => {
+      soundobj.pause();
+      soundobj.currentTime = 0;
     });
 
     mainGrid.appendChild(gridDiv);
